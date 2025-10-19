@@ -6,12 +6,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+// Importa el UserManager (Asegúrate de que la ruta sea correcta)
+import com.fabricodedev.myapplication.utils.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etNombreUsuario;
@@ -24,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-        // Ajuste de los bordes de la pantalla
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -32,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Obtener las referencias de los EditText por su ID
+        // Nota: En el XML de login, usas et_nombre_usuario y et_contrasenia
         etNombreUsuario = findViewById(R.id.et_nombre_usuario);
         etContrasena = findViewById(R.id.et_contrasenia);
 
@@ -40,9 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nombreUsuario = etNombreUsuario.getText().toString();
-                String contrasena = etContrasena.getText().toString();
-                // Aquí va la lógica de autenticación (ej. ir a HomeActivity)
+                handleLogin(); // Llamamos a la nueva función de login
             }
         });
 
@@ -52,6 +54,29 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
             startActivity(intent);
         });
+    }
 
+    private void handleLogin() {
+        String username = etNombreUsuario.getText().toString().trim();
+        String password = etContrasena.getText().toString();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Ingresa tu usuario y contraseña.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Llamar al Singleton para verificar las credenciales
+        boolean success = UserManager.getInstance().login(username, password);
+
+        if (success) {
+            Toast.makeText(this, "¡Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            // ⭐ PASAR EL NOMBRE DE USUARIO USANDO putExtra
+            intent.putExtra("EXTRA_USERNAME", username);
+            startActivity(intent);
+            finish(); // Cierra el Login
+        } else {
+            Toast.makeText(this, "Usuario o contraseña incorrectos.", Toast.LENGTH_LONG).show();
+        }
     }
 }
