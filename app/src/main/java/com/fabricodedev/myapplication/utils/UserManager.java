@@ -1,20 +1,52 @@
 package com.fabricodedev.myapplication.utils;
+
+import com.fabricodedev.myapplication.models.Miembro;
 import com.fabricodedev.myapplication.models.User;
+import com.fabricodedev.myapplication.models.Visita;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID; // Para generar IDs únicos
 
 public class UserManager {
     private static UserManager instance;
 
-    // Almacena objetos User: <Nombre de Usuario, Objeto User>
-    private final Map<String, User> users;
+    // Mapa para usuarios (Login): <username, User>
+    private final Map<String, User> appUsers;
+
+    // Mapa para MIEMBROS A VISITAR: <id, Miembro>
+    private final Map<String, Miembro> congregacion;
 
     private UserManager() {
-        users = new HashMap<>();
-        // HARDCODEAR el usuario inicial (usando el campo de usuario como clave)
-        // Datos: Email, Username, Password
+        appUsers = new HashMap<>();
+        congregacion = new HashMap<>();
+
+        // HARDCODEAR el usuario de la aplicación
         User hardcodedUser = new User("admin@example.com", "admin", "password123");
-        users.put(hardcodedUser.getUsername(), hardcodedUser);
+        appUsers.put(hardcodedUser.getUsername(), hardcodedUser);
+
+        // HARDCODEAR algunos miembros de la congregación
+        hardcodeMiembros();
+    }
+
+    private void hardcodeMiembros() {
+        // Miembro 1
+        Miembro m1 = new Miembro(UUID.randomUUID().toString(),
+                "Juan Pérez",
+                "Calle Falsa 123",
+                "555-1234");
+        m1.setUltimaVisita("10-09-2025");
+        m1.setEstadoEspiritual("Amarillo");
+        congregacion.put(m1.getId(), m1);
+
+        // Miembro 2
+        Miembro m2 = new Miembro(UUID.randomUUID().toString(),
+                "María Gómez",
+                "Avenida Siempre Viva 742",
+                "555-5678");
+        m2.setUltimaVisita("01-08-2025"); // Necesita visita urgente
+        m2.setEstadoEspiritual("Rojo");
+        congregacion.put(m2.getId(), m2);
     }
 
     public static synchronized UserManager getInstance() {
@@ -23,34 +55,76 @@ public class UserManager {
         }
         return instance;
     }
-
     /**
      * Lógica de REGISTRO: Guarda el usuario si el nombre de usuario no existe.
      */
     public boolean registerUser(String email, String username, String password) {
         // Usamos el username como clave única
-        if (users.containsKey(username)) {
+        if (appUsers.containsKey(username)) {
             return false; // El usuario ya existe
         }
 
         // Crear y guardar el nuevo usuario
         User newUser = new User(email, username, password);
-        users.put(username, newUser);
+        appUsers.put(username, newUser);
         return true;
+    }
+    // --- Lógica de LOGIN (se mantiene igual)
+    public boolean login(String username, String password) {
+        User storedUser = appUsers.get(username);
+        return storedUser != null && storedUser.getPassword().equals(password);
+    }
+
+    // --- Lógica de MIEMBROS
+
+    // 1. Obtener todos los miembros
+    public Map<String, Miembro> getAllMiembros() {
+        return congregacion;
+    }
+
+    // 2. Obtener un miembro por ID
+    public Miembro getMiembroById(String id) {
+        return congregacion.get(id);
+    }
+
+    // 3. Crear un nuevo miembro
+    public void addMiembro(Miembro nuevoMiembro) {
+        // Generar un ID único antes de guardarlo
+        congregacion.put(nuevoMiembro.getId(), nuevoMiembro);
     }
 
     /**
-     * Lógica de LOGIN: Verifica si el nombre de usuario y la contraseña coinciden.
+     * 4. Lógica para EDITAR/ACTUALIZAR un miembro existente.
+     * @param id El ID del miembro a actualizar.
+     * @param nombre Nuevo nombre.
+     * @param direccion Nueva dirección.
+     * @param telefono Nuevo teléfono.
+     * @return true si se actualizó, false si el miembro no existe.
      */
-    public boolean login(String username, String password) {
-        User storedUser = users.get(username);
+    public boolean updateMiembroData(String id, String nombre, String direccion, String telefono) {
+        Miembro miembroAEditar = congregacion.get(id);
 
-        // 1. Verificar si el usuario existe
-        if (storedUser == null) {
-            return false;
+        if (miembroAEditar != null) {
+            miembroAEditar.setNombre(nombre);
+            miembroAEditar.setDireccion(direccion);
+            miembroAEditar.setTelefono(telefono);
+            // NOTA: Los campos de visita y estado se actualizarán en otra función (visita)
+            return true;
         }
+        return false;
+    }
+    public boolean registrarNuevaVisita(String miembroId, String fecha, String nota, String estado, String visitador) {
+        Miembro miembro = congregacion.get(miembroId);
 
-        // 2. Verificar si la contraseña coincide
-        return storedUser.getPassword().equals(password);
+        if (miembro != null) {
+            // 1. Creamos el objeto Visita
+            Visita nuevaVisita = new Visita(fecha, nota, estado, visitador);
+
+            // 2. Usamos el método de Miembro para actualizar sus campos principales
+            miembro.agregarVisita(nuevaVisita);
+
+            return true;
+        }
+        return false;
     }
 }
