@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <View
+            android:id="@+id/v_estado_color"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/shape_circle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"/>
+
+        <TextView
+            android:id="@+id/tv_miembro_nombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="12dp"
+            android:text="Nombre Completo del Miembro"
+            app:layout_constraintStart_toEndOf="@+id/v_estado_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_call_action" />
+
+        <TextView
+            android:id="@+id/tv_ultima_visita"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:text="Última Visita: 10-09-2025"
+            app:layout_constraintStart_toStartOf="@+id/tv_miembro_nombre"
+            app:layout_constraintTop_toBottomOf="@+id/tv_miembro_nombre"
+            app:layout_constraintEnd_toStartOf="@+id/iv_call_action" />
+
+        <TextView
+            android:id="@+id/tv_miembro_telefono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:text="Teléfono: 555-1234"
+            app:layout_constraintStart_toStartOf="@+id/tv_miembro_nombre"
+            app:layout_constraintTop_toBottomOf="@+id/tv_ultima_visita"
+            app:layout_constraintEnd_toStartOf="@+id/iv_call_action" />
+
+        <ImageView
+            android:id="@+id/iv_call_action"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@android:drawable/sym_action_call"
+            android:contentDescription="Llamar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:clickable="true"
+            android:focusable="true"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
