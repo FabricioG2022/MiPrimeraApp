@@ -13,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-// Importa el UserManager (Asegúrate de que la ruta sea correcta)
 import com.fabricodedev.myapplication.utils.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Obtener las referencias de los EditText por su ID
-        // Nota: En el XML de login, usas et_nombre_usuario y et_contrasenia
         etNombreUsuario = findViewById(R.id.et_nombre_usuario);
         etContrasena = findViewById(R.id.et_contrasenia);
 
@@ -44,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleLogin(); // Llamamos a la nueva función de login
+                handleLogin();
             }
         });
 
@@ -70,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (success) {
             Toast.makeText(this, "¡Inicio de sesión exitoso!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MiembrosActivity.class);
             // ⭐ PASAR EL NOMBRE DE USUARIO USANDO putExtra
             intent.putExtra("EXTRA_USERNAME", username);
             startActivity(intent);
