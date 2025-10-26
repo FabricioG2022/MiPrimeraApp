@@ -27,6 +27,8 @@
             android:exported="false" />
         <activity android:name=".MiembrosActivity" />
         <activity android:name=".DetalleMiembroActivity" />
+        <activity android:name=".RegistrarVisitaActivity" />
+        <activity android:name=".EditarMiembroActivity" />
     </application>
 
 </manifest>

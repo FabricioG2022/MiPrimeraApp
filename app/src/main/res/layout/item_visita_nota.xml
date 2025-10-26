@@ -4,13 +4,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:background="@drawable/shape_circle"> <TextView
-    android:id="@+id/tv_historial_fecha"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textStyle="bold"
-    android:text="20-09-2025 (Estado: Amarillo)" />
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/tv_historial_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="20-09-2025 (Estado: Amarillo)" />
 
     <TextView
         android:id="@+id/tv_historial_nota"
@@ -18,4 +19,5 @@
         android:layout_height="wrap_content"
         android:text="Se discutió la falta de asistencia y se acordó un plan de lectura semanal. Se dejó ánimo y apoyo. Visitador: [Líder]"
         android:layout_marginTop="4dp"/>
+
 </LinearLayout>
