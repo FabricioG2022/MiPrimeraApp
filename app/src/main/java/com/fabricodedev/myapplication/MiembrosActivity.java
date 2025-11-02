@@ -1,6 +1,7 @@
 package com.fabricodedev.myapplication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,8 +74,28 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
     // ⭐ Manejo del click en el Icono de Llamada
     @Override
     public void onCallClick(Miembro miembro) {
-        // TODO: Implementar un Intent para hacer la llamada (DIAL_ACTION)
-        Toast.makeText(this, "Llamando a: " + miembro.getTelefono(), Toast.LENGTH_SHORT).show();
+        String telefono = miembro.getTelefono();
+
+        // Validación básica
+        if (telefono == null || telefono.isEmpty()) {
+            Toast.makeText(this, "El miembro no tiene un teléfono registrado.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // 1. Crear el Intent de llamada
+        // ACTION_DIAL solo prepara la llamada, no la inicia directamente.
+        Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+
+        // 2. Establecer el URI del teléfono (formato tel:1234567)
+        dialIntent.setData(Uri.parse("tel:" + telefono));
+
+        // 3. Iniciar la actividad
+        try {
+            startActivity(dialIntent);
+        } catch (Exception e) {
+            // En caso de que no haya ninguna app de teléfono disponible (raro, pero posible)
+            Toast.makeText(this, "No se pudo iniciar la aplicación de teléfono.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Es buena práctica recargar los datos cuando se vuelve a esta actividad (después de editar o registrar visita)
