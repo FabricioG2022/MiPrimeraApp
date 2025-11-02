@@ -138,6 +138,18 @@ public class UserManager {
         }
         return false;
     }
+    /**
+    * 5. Eliminar un miembro de la congregación por su ID.
+    * @param id El ID del miembro a eliminar.
+    * @return true si se eliminó, false si el miembro no existía.
+    */
+    public boolean deleteMiembro(String id) {
+        if (congregacion.containsKey(id)) {
+            congregacion.remove(id);
+            return true;
+        }
+        return false;
+    }
     public boolean registrarNuevaVisita(String miembroId, String fecha, String nota, String estado, String visitador) {
         Miembro miembro = congregacion.get(miembroId);
 
