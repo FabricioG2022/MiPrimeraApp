@@ -46,8 +46,8 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
 
         // Configurar el FAB para añadir un nuevo miembro
         findViewById(R.id.fab_add_miembro).setOnClickListener(v -> {
-            // TODO: Crear y lanzar AddMiembroActivity
-            Toast.makeText(this, "Abriendo formulario para nuevo miembro", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, AddMiembroActivity.class);
+            startActivity(intent);
         });
     }
 

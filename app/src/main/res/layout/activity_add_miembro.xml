@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddMiembroActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir Nuevo Miembro"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre Completo:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_add_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre y Apellido del Miembro"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dirección de Domicilio:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_add_direccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej: Avenida Siempre Viva 742"
+            android:inputType="textPostalAddress"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teléfono de Contacto:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_add_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej: 555-5678"
+            android:inputType="phone"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btn_guardar_nuevo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AÑADIR MIEMBRO"
+            android:backgroundTint="#0288D1"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+</ScrollView>

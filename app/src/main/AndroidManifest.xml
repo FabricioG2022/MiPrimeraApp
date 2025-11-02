@@ -29,6 +29,7 @@
         <activity android:name=".DetalleMiembroActivity" />
         <activity android:name=".RegistrarVisitaActivity" />
         <activity android:name=".EditarMiembroActivity" />
+        <activity android:name=".AddMiembroActivity" />
     </application>
 
 </manifest>

@@ -44,9 +44,25 @@ public class UserManager {
                 "María Gómez",
                 "Avenida Siempre Viva 742",
                 "555-5678");
-        m2.setUltimaVisita("01-08-2025"); // Necesita visita urgente
+        m2.setUltimaVisita("01-08-2025");
         m2.setEstadoEspiritual("Rojo");
         congregacion.put(m2.getId(), m2);
+        // Miembro 3
+        Miembro m3 = new Miembro(UUID.randomUUID().toString(),
+                "Luis Segovia",
+                "Sarmiento 932",
+                "589-2587");
+        m2.setUltimaVisita("30-10-2025");
+        m2.setEstadoEspiritual("Amarillo");
+        congregacion.put(m3.getId(), m3);
+        // Miembro 4
+        Miembro m4 = new Miembro(UUID.randomUUID().toString(),
+                "Emanuel Bilbao",
+                "3 de Febrero 555",
+                "986-2587");
+        m2.setUltimaVisita("17-09-2025");
+        m2.setEstadoEspiritual("Verde");
+        congregacion.put(m4.getId(), m4);
     }
 
     public static synchronized UserManager getInstance() {
@@ -88,11 +104,20 @@ public class UserManager {
     }
 
     // 3. Crear un nuevo miembro
+    public void addMiembro(String nombre, String direccion, String telefono) {
+        // Generar un ID único
+        String newId = UUID.randomUUID().toString();
+
+        // Crear el objeto Miembro usando el constructor
+        Miembro nuevoMiembro = new Miembro(newId, nombre, direccion, telefono);
+
+        // Almacenar el miembro en el mapa
+        congregacion.put(newId, nuevoMiembro);
+    }
     public void addMiembro(Miembro nuevoMiembro) {
         // Generar un ID único antes de guardarlo
         congregacion.put(nuevoMiembro.getId(), nuevoMiembro);
     }
-
     /**
      * 4. Lógica para EDITAR/ACTUALIZAR un miembro existente.
      * @param id El ID del miembro a actualizar.
