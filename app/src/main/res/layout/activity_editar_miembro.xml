@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditarMiembroActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Datos del Miembro"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre Completo:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_editar_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej: Juan Pérez"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dirección:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_editar_direccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej: Calle Falsa 123"
+            android:inputType="textPostalAddress"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teléfono:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_editar_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej: 555-1234"
+            android:inputType="phone"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btn_guardar_edicion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GUARDAR CAMBIOS"
+            android:backgroundTint="#0288D1"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</ScrollView>
