@@ -1,4 +1,4 @@
-package com.fabricodedev.myapplication;
+package com.fabricodedev.appvisitashermanos;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fabricodedev.myapplication.adapters.VisitaAdapter;
-import com.fabricodedev.myapplication.models.Miembro;
-import com.fabricodedev.myapplication.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.adapters.VisitaAdapter;
+import com.fabricodedev.appvisitashermanos.models.Miembro;
+import com.fabricodedev.appvisitashermanos.utils.UserManager;
 
 public class DetalleMiembroActivity extends AppCompatActivity {
 

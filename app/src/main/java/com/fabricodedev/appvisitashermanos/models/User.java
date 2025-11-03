@@ -1,4 +1,4 @@
-package com.fabricodedev.myapplication.models;
+package com.fabricodedev.appvisitashermanos.models;
 
 public class User {
     private String email;

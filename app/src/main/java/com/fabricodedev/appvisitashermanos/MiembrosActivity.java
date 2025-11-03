@@ -1,4 +1,4 @@
-package com.fabricodedev.myapplication;
+package com.fabricodedev.appvisitashermanos;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fabricodedev.myapplication.adapters.MiembroAdapter;
-import com.fabricodedev.myapplication.models.Miembro;
-import com.fabricodedev.myapplication.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.adapters.MiembroAdapter;
+import com.fabricodedev.appvisitashermanos.models.Miembro;
+import com.fabricodedev.appvisitashermanos.utils.UserManager;
 
 import java.util.ArrayList;
 import java.util.List;

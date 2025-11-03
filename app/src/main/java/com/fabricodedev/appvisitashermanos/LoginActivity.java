@@ -1,4 +1,4 @@
-package com.fabricodedev.myapplication;
+package com.fabricodedev.appvisitashermanos;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import com.fabricodedev.myapplication.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.utils.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etNombreUsuario;

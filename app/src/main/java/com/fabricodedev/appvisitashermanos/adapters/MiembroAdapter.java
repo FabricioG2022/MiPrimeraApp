@@ -1,6 +1,5 @@
-package com.fabricodedev.myapplication.adapters;
+package com.fabricodedev.appvisitashermanos.adapters;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fabricodedev.myapplication.R;
-import com.fabricodedev.myapplication.models.Miembro;
+import com.fabricodedev.appvisitashermanos.R;
+import com.fabricodedev.appvisitashermanos.models.Miembro;
 import java.util.List;
 
 public class MiembroAdapter extends RecyclerView.Adapter<MiembroAdapter.MiembroViewHolder> {

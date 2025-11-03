@@ -1,8 +1,7 @@
-package com.fabricodedev.myapplication;
+package com.fabricodedev.appvisitashermanos;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,7 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 // Importa el UserManager y User (Asegúrate de que la ruta sea correcta)
-import com.fabricodedev.myapplication.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.utils.UserManager;
 
 public class RegistroActivity extends AppCompatActivity {
 

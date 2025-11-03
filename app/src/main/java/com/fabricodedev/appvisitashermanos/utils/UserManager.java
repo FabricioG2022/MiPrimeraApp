@@ -1,8 +1,8 @@
-package com.fabricodedev.myapplication.utils;
+package com.fabricodedev.appvisitashermanos.utils;
 
-import com.fabricodedev.myapplication.models.Miembro;
-import com.fabricodedev.myapplication.models.User;
-import com.fabricodedev.myapplication.models.Visita;
+import com.fabricodedev.appvisitashermanos.models.Miembro;
+import com.fabricodedev.appvisitashermanos.models.User;
+import com.fabricodedev.appvisitashermanos.models.Visita;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.fabricodedev.myapplication;
+package com.fabricodedev.appvisitashermanos;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.fabricodedev.myapplication.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.utils.UserManager;
 
 public class AddMiembroActivity extends AppCompatActivity {
 
