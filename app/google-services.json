@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "625177670096",
+    "project_id": "appvisitasdehermanos",
+    "storage_bucket": "appvisitasdehermanos.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625177670096:android:b609baae15bd1df23149d5",
+        "android_client_info": {
+          "package_name": "com.fabricodedev.appvisitashermanos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6WySaT_s_YpJ-VtLLwkxmJPODCl-CZAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
