@@ -1,29 +1,28 @@
 package com.fabricodedev.appvisitashermanos.utils;
 
 import com.fabricodedev.appvisitashermanos.models.Miembro;
-import com.fabricodedev.appvisitashermanos.models.User;
 import com.fabricodedev.appvisitashermanos.models.Visita;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID; // Para generar IDs únicos
 
-public class UserManager {
-    private static UserManager instance;
+public class MiembrosManager {
+    private static MiembrosManager instance;
 
     // Mapa para usuarios (Login): <username, User>
-    private final Map<String, User> appUsers;
+    //private final Map<String, User> appUsers;
 
     // Mapa para MIEMBROS A VISITAR: <id, Miembro>
     private final Map<String, Miembro> congregacion;
 
-    private UserManager() {
-        appUsers = new HashMap<>();
+    private MiembrosManager() {
+       // appUsers = new HashMap<>();
         congregacion = new HashMap<>();
 
         // HARDCODEAR el usuario de la aplicación
-        User hardcodedUser = new User("admin@example.com", "admin", "password123");
-        appUsers.put(hardcodedUser.getUsername(), hardcodedUser);
+       // User hardcodedUser = new User("admin@example.com", "admin", "password123");
+       // appUsers.put(hardcodedUser.getUsername(), hardcodedUser);
 
         // HARDCODEAR algunos miembros de la congregación
         hardcodeMiembros();
@@ -65,16 +64,16 @@ public class UserManager {
         congregacion.put(m4.getId(), m4);
     }
 
-    public static synchronized UserManager getInstance() {
+    public static synchronized MiembrosManager getInstance() {
         if (instance == null) {
-            instance = new UserManager();
+            instance = new MiembrosManager();
         }
         return instance;
     }
     /**
      * Lógica de REGISTRO: Guarda el usuario si el nombre de usuario no existe.
      */
-    public boolean registerUser(String email, String username, String password) {
+   /* public boolean registerUser(String email, String username, String password) {
         // Usamos el username como clave única
         if (appUsers.containsKey(username)) {
             return false; // El usuario ya existe
@@ -89,7 +88,7 @@ public class UserManager {
     public boolean login(String username, String password) {
         User storedUser = appUsers.get(username);
         return storedUser != null && storedUser.getPassword().equals(password);
-    }
+    }*/
 
     // --- Lógica de MIEMBROS
 

@@ -32,41 +32,16 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/et_nombre_usuario"
+        android:id="@+id/et_email"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:hint="Ingresa tu email"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_email_registro" />
-
-    <TextView
-        android:id="@+id/tv_nombre_registro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="NOMBRE DE USUARIO"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_nombre_usuario" />
-
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="28dp"
-        android:hint="Ingresa tu usuario"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nombre_registro" />
 
     <TextView
         android:id="@+id/tv_contrasenia_registro"
@@ -87,7 +62,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:hint="Ingresa tu contraseña"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +87,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:hint="Reingresa tu contraseña"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,11 +97,11 @@
         android:id="@+id/btn_register_button"
         android:layout_width="350dp"
         android:layout_height="70dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#0288D1"
         android:text="REGISTRARSE"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:backgroundTint="#0288D1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -137,20 +112,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="160dp"
         android:text="Estas registrado?"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_inicia_sesion_aqui"
-        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_inicia_sesion_aqui"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="160dp"
         android:clickable="true"
         android:focusable="true"
         android:text="Inicia sesión aquí"
