@@ -8,7 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fabricodedev.appvisitashermanos.models.Miembro;
-import com.fabricodedev.appvisitashermanos.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 
 public class EditarMiembroActivity extends AppCompatActivity {
 
@@ -45,7 +45,7 @@ public class EditarMiembroActivity extends AppCompatActivity {
     }
 
     private void cargarDatosMiembro() {
-        miembroActual = UserManager.getInstance().getMiembroById(miembroId);
+        miembroActual = MiembrosManager.getInstance().getMiembroById(miembroId);
 
         if (miembroActual != null) {
             etNombre.setText(miembroActual.getNombre());
@@ -68,7 +68,7 @@ public class EditarMiembroActivity extends AppCompatActivity {
         }
 
         // Llamar al método de actualización del Singleton
-        boolean success = UserManager.getInstance().updateMiembroData(
+        boolean success = MiembrosManager.getInstance().updateMiembroData(
                 miembroId,
                 nuevoNombre,
                 nuevaDireccion,

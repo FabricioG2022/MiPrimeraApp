@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fabricodedev.appvisitashermanos.adapters.VisitaAdapter;
 import com.fabricodedev.appvisitashermanos.models.Miembro;
-import com.fabricodedev.appvisitashermanos.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 
 public class DetalleMiembroActivity extends AppCompatActivity {
 
@@ -74,7 +74,7 @@ public class DetalleMiembroActivity extends AppCompatActivity {
     }
 
     private void loadMiembroData() {
-        miembroActual = UserManager.getInstance().getMiembroById(miembroId);
+        miembroActual = MiembrosManager.getInstance().getMiembroById(miembroId);
 
         if (miembroActual != null) {
             // Actualizar UI con datos del Miembro
@@ -135,7 +135,7 @@ public class DetalleMiembroActivity extends AppCompatActivity {
     }
 
     private void eliminarMiembro(String id) {
-        boolean eliminado = UserManager.getInstance().deleteMiembro(id);
+        boolean eliminado = MiembrosManager.getInstance().deleteMiembro(id);
 
         if (eliminado) {
             Toast.makeText(this, "Miembro eliminado con éxito.", Toast.LENGTH_SHORT).show();

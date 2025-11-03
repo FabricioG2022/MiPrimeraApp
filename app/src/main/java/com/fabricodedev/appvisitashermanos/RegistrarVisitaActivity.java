@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fabricodedev.appvisitashermanos.models.Miembro;
-import com.fabricodedev.appvisitashermanos.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,7 +66,7 @@ public class RegistrarVisitaActivity extends AppCompatActivity {
     }
 
     private void cargarDatosIniciales() {
-        Miembro miembro = UserManager.getInstance().getMiembroById(miembroId);
+        Miembro miembro = MiembrosManager.getInstance().getMiembroById(miembroId);
         if (miembro != null) {
             tvNombreMiembro.setText(miembro.getNombre());
         }
@@ -95,7 +95,7 @@ public class RegistrarVisitaActivity extends AppCompatActivity {
         String visitador = "Líder Principal";
 
         // 3. Llamar al método de registro en el Manager
-        boolean success = UserManager.getInstance().registrarNuevaVisita(
+        boolean success = MiembrosManager.getInstance().registrarNuevaVisita(
                 miembroId,
                 fecha,
                 nota,

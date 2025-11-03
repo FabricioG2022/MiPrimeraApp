@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.fabricodedev.appvisitashermanos.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 
 public class AddMiembroActivity extends AppCompatActivity {
 
@@ -41,7 +41,7 @@ public class AddMiembroActivity extends AppCompatActivity {
         }
 
         // Llamar al método de creación del Singleton
-        UserManager.getInstance().addMiembro(nombre, direccion, telefono);
+        MiembrosManager.getInstance().addMiembro(nombre, direccion, telefono);
 
         Toast.makeText(this, nombre + " ha sido añadido a la congregación.", Toast.LENGTH_LONG).show();
 

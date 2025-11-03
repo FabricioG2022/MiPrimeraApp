@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fabricodedev.appvisitashermanos.adapters.MiembroAdapter;
 import com.fabricodedev.appvisitashermanos.models.Miembro;
-import com.fabricodedev.appvisitashermanos.utils.UserManager;
+import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
     // Método que carga los datos desde el Singleton
     private void loadMiembrosData() {
         // Convertir el Map de Miembros a una List para el RecyclerView
-        Map<String, Miembro> miembrosMap = UserManager.getInstance().getAllMiembros();
+        Map<String, Miembro> miembrosMap = MiembrosManager.getInstance().getAllMiembros();
         miembrosList = new ArrayList<>(miembrosMap.values());
 
         adapter = new MiembroAdapter(miembrosList, this);
