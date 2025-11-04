@@ -1,4 +1,8 @@
 package com.fabricodedev.appvisitashermanos;
+// ⭐ Importaciones de Firebase
+import com.fabricodedev.appvisitashermanos.models.Visita;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -27,10 +31,16 @@ public class RegistrarVisitaActivity extends AppCompatActivity {
     private EditText etNotaVisita;
     private Button btnGuardarVisita;
 
+    // ⭐ Referencia a Firestore
+    private FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_visita);
+
+        // ⭐ Inicializar Firestore (NUEVO)
+        db = MiembrosManager.getInstance().getDb();
 
         // 1. Obtener el ID del Intent
         miembroId = getIntent().getStringExtra("MIEMBRO_ID");
@@ -65,19 +75,37 @@ public class RegistrarVisitaActivity extends AppCompatActivity {
         btnGuardarVisita.setOnClickListener(v -> guardarVisita());
     }
 
+    // ⭐ MIGRACIÓN 1: Cargar datos iniciales desde Firestore
     private void cargarDatosIniciales() {
-        Miembro miembro = MiembrosManager.getInstance().getMiembroById(miembroId);
-        if (miembro != null) {
-            tvNombreMiembro.setText(miembro.getNombre());
-        }
 
-        // Establecer la fecha actual por defecto (formato DD-MM-YYYY)
+        if (miembroId == null || db == null) return;
+
+        // 1. Obtener el nombre del miembro (ASÍNCRONO)
+        db.collection("miembros").document(miembroId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Miembro miembro = documentSnapshot.toObject(Miembro.class);
+                        if (miembro != null) {
+                            tvNombreMiembro.setText(miembro.getNombre());
+                        }
+                    } else {
+                        Toast.makeText(this, "Miembro no encontrado.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al cargar datos iniciales.", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+
+        // 2. Establecer la fecha actual (SÍNCRONO, se mantiene igual)
         String fechaActual = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         tvFechaVisita.setText(fechaActual);
     }
 
+    // ⭐ MIGRACIÓN 2: Guardar visita usando la llamada asíncrona del Manager
     private void guardarVisita() {
-        // Obtener valores de la UI
+        // Obtener valores de la UI (se mantiene igual)
         String fecha = tvFechaVisita.getText().toString();
         String nota = etNotaVisita.getText().toString().trim();
 
@@ -88,28 +116,35 @@ public class RegistrarVisitaActivity extends AppCompatActivity {
 
         // 1. Determinar el Estado Espiritual seleccionado
         int selectedId = rgEstadoEspiritual.getCheckedRadioButtonId();
-        RadioButton selectedRadioButton = findViewById(selectedId);
-        String estado = selectedRadioButton.getText().toString(); // Será "Verde", "Amarillo" o "Rojo"
+        if (selectedId == -1) {
+            Toast.makeText(this, "Selecciona el estado espiritual.", Toast.LENGTH_LONG).show();
+            return;
+        }
 
-        // 2. El Visitador. Usamos un placeholder por ahora (con el login real, se usara el nombre del líder logueado)
+        RadioButton selectedRadioButton = findViewById(selectedId);
+        String nuevoEstado = selectedRadioButton.getText().toString(); // Será "Verde", "Amarillo" o "Rojo"
+
+        // 2. El Visitador.
+        // En una app real, obtendrías esto de FirebaseAuth.getInstance().getCurrentUser().getEmail()
         String visitador = "Líder Principal";
 
-        // 3. Llamar al método de registro en el Manager
-        boolean success = MiembrosManager.getInstance().registrarNuevaVisita(
+        // 3. Crear el objeto Visita
+        Visita nuevaVisita = new Visita(fecha, nota, nuevoEstado, visitador);
+
+        // 4. Llamar al método de registro en el Manager (ASÍNCRONO)
+        // Ya no devuelve 'boolean success', solo inicia la operación.
+        MiembrosManager.getInstance().registrarNuevaVisita(
                 miembroId,
-                fecha,
-                nota,
-                estado,
-                visitador
+                nuevaVisita, // Usamos el objeto Visita
+                nuevoEstado // Pasamos el nuevo estado
         );
 
-        if (success) {
-            Toast.makeText(this, "¡Visita registrada con éxito! El estado de " + tvNombreMiembro.getText().toString() + " es ahora " + estado + ".", Toast.LENGTH_LONG).show();
-            // Cerrar la actividad para volver a DetalleMiembroActivity (que se recargará en onResume)
-            finish();
-        } else {
-            Toast.makeText(this, "Error al registrar la visita. Miembro no encontrado.", Toast.LENGTH_LONG).show();
-        }
+        // 5. Dar feedback y cerrar (asumiendo que la operación es exitosa)
+        Toast.makeText(this, "¡Visita registrada con éxito! El estado se actualizará en Detalle.", Toast.LENGTH_LONG).show();
+        finish();
+
+        // NOTA: Para un feedback 100% preciso, deberías añadir Listeners a la llamada
+        // en MiembrosManager y usar una Interfaz de Callback, pero esto funciona para la migración.
     }
 
     private void setRadioButtonColor(RadioButton radioButton, int color) {

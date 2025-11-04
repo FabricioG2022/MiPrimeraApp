@@ -18,6 +18,10 @@ import com.fabricodedev.appvisitashermanos.adapters.VisitaAdapter;
 import com.fabricodedev.appvisitashermanos.models.Miembro;
 import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 
+// ⭐ Importaciones de Firestore
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
+
 public class DetalleMiembroActivity extends AppCompatActivity {
 
     private String miembroId;
@@ -26,6 +30,8 @@ public class DetalleMiembroActivity extends AppCompatActivity {
     private TextView tvNombre, tvEstado, tvTelefono, tvDireccion;
     private RecyclerView rvHistorial;
     private Button btnRegistrarVisita, btnEditarDatos;
+    // ⭐ Referencia a Firestore
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +55,10 @@ public class DetalleMiembroActivity extends AppCompatActivity {
             return;
         }
 
-        // 2. Referencias a vistas
+        // ⭐ 2. Inicializar Firestore
+        db = MiembrosManager.getInstance().getDb();
+
+        // 3. Referencias a vistas
         tvNombre = findViewById(R.id.tv_detalle_nombre);
         tvEstado = findViewById(R.id.tv_detalle_estado);
         tvTelefono = findViewById(R.id.tv_detalle_telefono);
@@ -58,10 +67,10 @@ public class DetalleMiembroActivity extends AppCompatActivity {
         btnRegistrarVisita = findViewById(R.id.btn_registrar_visita);
         btnEditarDatos = findViewById(R.id.btn_editar_datos);
 
-        // 3. Configurar RecyclerView para el historial
+        // 4. Configurar RecyclerView para el historial
         rvHistorial.setLayoutManager(new LinearLayoutManager(this));
 
-        // 4. Configurar listeners de botones
+        // 5. Configurar listeners de botones
         btnEditarDatos.setOnClickListener(v -> handleEditarDatos());
         btnRegistrarVisita.setOnClickListener(v -> handleRegistrarVisita());
     }
@@ -73,23 +82,43 @@ public class DetalleMiembroActivity extends AppCompatActivity {
         loadMiembroData();
     }
 
+    // ⭐ MÉTODO MIGRADO 1: Carga de datos asíncrona desde Firestore
     private void loadMiembroData() {
-        miembroActual = MiembrosManager.getInstance().getMiembroById(miembroId);
+        if (miembroId == null || db == null) return;
 
-        if (miembroActual != null) {
-            // Actualizar UI con datos del Miembro
-            tvNombre.setText(miembroActual.getNombre());
-            tvEstado.setText("Estado: " + miembroActual.getEstadoEspiritual() + " | Última Visita: " + miembroActual.getUltimaVisita());
-            tvTelefono.setText("Teléfono: " + miembroActual.getTelefono());
-            tvDireccion.setText("Dirección: " + miembroActual.getDireccion());
+        db.collection("miembros").document(miembroId).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            miembroActual = document.toObject(Miembro.class);
 
-            // Conectar el historial
-            VisitaAdapter adapter = new VisitaAdapter(miembroActual.getHistorialVisitas());
-            rvHistorial.setAdapter(adapter);
+                            if (miembroActual != null) {
+                                // Actualizar UI con datos del Miembro
+                                tvNombre.setText(miembroActual.getNombre());
+                                tvEstado.setText("Estado: " + miembroActual.getEstadoEspiritual() + " | Última Visita: " + miembroActual.getUltimaVisita());
+                                tvTelefono.setText("Teléfono: " + miembroActual.getTelefono());
+                                tvDireccion.setText("Dirección: " + miembroActual.getDireccion());
 
-            // Asegurar que se muestre el historial más reciente primero (opcional)
-            rvHistorial.scrollToPosition(adapter.getItemCount() - 1);
-        }
+                                // Conectar el historial
+                                // Nota: Asegúrate de que getHistorialVisitas() devuelva una lista inicializada (no null)
+                                VisitaAdapter adapter = new VisitaAdapter(miembroActual.getHistorialVisitas());
+                                rvHistorial.setAdapter(adapter);
+                                rvHistorial.scrollToPosition(adapter.getItemCount() > 0 ? adapter.getItemCount() - 1 : 0);
+
+                                // Actualizar el título de la Toolbar
+                                if (getSupportActionBar() != null) {
+                                    getSupportActionBar().setTitle(miembroActual.getNombre());
+                                }
+                            }
+                        } else {
+                            Toast.makeText(this, "Error: Miembro no encontrado en la base de datos.", Toast.LENGTH_SHORT).show();
+                            // finish(); // Opcional: Cerrar si el miembro fue eliminado
+                        }
+                    } else {
+                        Toast.makeText(this, "Error de conexión: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void handleEditarDatos() {
@@ -134,17 +163,20 @@ public class DetalleMiembroActivity extends AppCompatActivity {
                 .show();
     }
 
+    // ⭐ MÉTODO MIGRADO 2: Eliminación asíncrona. Ya no devuelve un booleano.
     private void eliminarMiembro(String id) {
-        boolean eliminado = MiembrosManager.getInstance().deleteMiembro(id);
+        // Llamar al método de eliminación de Firestore (ya no devuelve booleano)
+        db.collection("miembros").document(id).delete()
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(this, "Miembro eliminado con éxito.", Toast.LENGTH_SHORT).show();
+                    // Finaliza la actividad para volver a MiembrosActivity
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al eliminar: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                });
 
-        if (eliminado) {
-            Toast.makeText(this, "Miembro eliminado con éxito.", Toast.LENGTH_SHORT).show();
-
-            // Finaliza la actividad para volver a MiembrosActivity
-            finish();
-        } else {
-            Toast.makeText(this, "Error: No se pudo encontrar el miembro para eliminar.", Toast.LENGTH_LONG).show();
-        }
+        // El antiguo código ha sido eliminado/reemplazado.
     }
     @Override
     public boolean onSupportNavigateUp() {

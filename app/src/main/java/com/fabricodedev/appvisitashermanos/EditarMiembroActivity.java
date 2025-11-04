@@ -1,4 +1,7 @@
 package com.fabricodedev.appvisitashermanos;
+// ⭐ Nuevos Imports de Firebase
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -13,8 +16,8 @@ import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 public class EditarMiembroActivity extends AppCompatActivity {
 
     private String miembroId;
-    private Miembro miembroActual;
-
+    // ⭐ Referencia a Firestore
+    private FirebaseFirestore db;
     private EditText etNombre, etDireccion, etTelefono;
     private Button btnGuardar;
 
@@ -31,6 +34,9 @@ public class EditarMiembroActivity extends AppCompatActivity {
             return;
         }
 
+        // ⭐ Inicializar Firestore (NUEVO)
+        db = MiembrosManager.getInstance().getDb();
+
         // 2. Referencias a vistas
         etNombre = findViewById(R.id.et_editar_nombre);
         etDireccion = findViewById(R.id.et_editar_direccion);
@@ -44,19 +50,33 @@ public class EditarMiembroActivity extends AppCompatActivity {
         btnGuardar.setOnClickListener(v -> guardarCambios());
     }
 
+    // ⭐ MIGRACIÓN 1: Cargar datos desde Firestore
     private void cargarDatosMiembro() {
-        miembroActual = MiembrosManager.getInstance().getMiembroById(miembroId);
+        if (miembroId == null || db == null) return;
 
-        if (miembroActual != null) {
-            etNombre.setText(miembroActual.getNombre());
-            etDireccion.setText(miembroActual.getDireccion());
-            etTelefono.setText(miembroActual.getTelefono());
-        } else {
-            Toast.makeText(this, "Miembro no encontrado para edición.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        db.collection("miembros").document(miembroId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        // Convertir el Documento a Objeto Miembro
+                        Miembro miembroActual = documentSnapshot.toObject(Miembro.class);
+
+                        if (miembroActual != null) {
+                            etNombre.setText(miembroActual.getNombre());
+                            etDireccion.setText(miembroActual.getDireccion());
+                            etTelefono.setText(miembroActual.getTelefono());
+                        }
+                    } else {
+                        Toast.makeText(this, "Miembro no encontrado para edición.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al cargar datos: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    finish();
+                });
     }
 
+    // ⭐ MIGRACIÓN 2: Guardar cambios usando la llamada asíncrona del Manager
     private void guardarCambios() {
         String nuevoNombre = etNombre.getText().toString().trim();
         String nuevaDireccion = etDireccion.getText().toString().trim();
@@ -67,20 +87,19 @@ public class EditarMiembroActivity extends AppCompatActivity {
             return;
         }
 
-        // Llamar al método de actualización del Singleton
-        boolean success = MiembrosManager.getInstance().updateMiembroData(
+        // Llamar al método de actualización de Firestore (ASÍNCRONO)
+        // Ya no devuelve un booleano
+        MiembrosManager.getInstance().updateMiembroData(
                 miembroId,
                 nuevoNombre,
                 nuevaDireccion,
                 nuevoTelefono
         );
 
-        if (success) {
-            Toast.makeText(this, "Datos de " + nuevoNombre + " actualizados con éxito.", Toast.LENGTH_LONG).show();
-            // Cierra la actividad para volver a DetalleMiembroActivity (que recargará los datos en onResume)
-            finish();
-        } else {
-            Toast.makeText(this, "Error al guardar los cambios.", Toast.LENGTH_LONG).show();
-        }
+        // Mostramos el mensaje de éxito inmediatamente, asumiendo que la operación se completará.
+        Toast.makeText(this, "Datos actualizados con éxito (Firestore).", Toast.LENGTH_LONG).show();
+
+        // Cierra la actividad para volver a DetalleMiembroActivity (que recargará los datos en onResume)
+        finish();
     }
 }

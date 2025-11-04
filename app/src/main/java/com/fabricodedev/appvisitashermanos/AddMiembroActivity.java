@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import java.util.UUID;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fabricodedev.appvisitashermanos.models.Miembro;
 import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 
 public class AddMiembroActivity extends AppCompatActivity {
@@ -39,13 +40,23 @@ public class AddMiembroActivity extends AppCompatActivity {
             Toast.makeText(this, "Todos los campos son obligatorios.", Toast.LENGTH_LONG).show();
             return;
         }
+// 1. Generar un ID único para Firestore
+        String newId = UUID.randomUUID().toString();
 
-        // Llamar al método de creación del Singleton
-        MiembrosManager.getInstance().addMiembro(nombre, direccion, telefono);
+        // 2. Crear el objeto Miembro
+        // El constructor de Miembro debe ser compatible con: (id, nombre, direccion, telefono)
+        Miembro nuevoMiembro = new Miembro(newId, nombre, direccion, telefono);
 
-        Toast.makeText(this, nombre + " ha sido añadido a la congregación.", Toast.LENGTH_LONG).show();
+        // Inicializar campos de Firestore
+        // Esto asegura que el objeto tenga las listas y campos necesarios para Firestore
+        nuevoMiembro.setUltimaVisita("N/A");
+        nuevoMiembro.setEstadoEspiritual("Verde");
+        // Si la lista de historialVisitas es null, inicialízala en el constructor de Miembro.
 
-        // Cerrar la actividad para volver a la lista (MiembrosActivity se recargará en onResume)
+        // 3. ⭐ LLAMADA CORREGIDA: Pasar el objeto Miembro completo
+        MiembrosManager.getInstance().addMiembro(nuevoMiembro);
+
+        Toast.makeText(this, nombre + " ha sido añadido a la congregación (Firestore).", Toast.LENGTH_LONG).show();
         finish();
     }
 }

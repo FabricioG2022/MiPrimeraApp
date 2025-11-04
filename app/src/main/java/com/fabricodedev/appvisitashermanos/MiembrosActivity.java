@@ -17,6 +17,11 @@ import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
+
+// ⭐ Imports de Firestore
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class MiembrosActivity extends AppCompatActivity implements MiembroAdapter.OnItemClickListener {
 
@@ -24,11 +29,16 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
     private MiembroAdapter adapter;
     private List<Miembro> miembrosList;
     private TextView tvSaludoLider;
+    // ⭐ Referencia a Firestore
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_miembros); // Usamos el nuevo layout
+        setContentView(R.layout.activity_miembros);
+
+        // ⭐ Inicializar Firestore (NUEVO)
+        db = MiembrosManager.getInstance().getDb();
 
         recyclerView = findViewById(R.id.rv_miembros_list);
         tvSaludoLider = findViewById(R.id.tv_saludo_lider);
@@ -41,9 +51,12 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
 
         // Configurar la lista
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // ⭐ Inicializar la lista
+        miembrosList = new ArrayList<>();
 
-        // Cargar datos
-        loadMiembrosData();
+        // ⭐ Inicializar el adaptador
+        adapter = new MiembroAdapter(miembrosList, this);
+        recyclerView.setAdapter(adapter);
 
         // Configurar el FAB para añadir un nuevo miembro
         findViewById(R.id.fab_add_miembro).setOnClickListener(v -> {
@@ -52,14 +65,30 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
         });
     }
 
-    // Método que carga los datos desde el Singleton
-    private void loadMiembrosData() {
-        // Convertir el Map de Miembros a una List para el RecyclerView
-        Map<String, Miembro> miembrosMap = MiembrosManager.getInstance().getAllMiembros();
-        miembrosList = new ArrayList<>(miembrosMap.values());
+    // ⭐ EL MÉTODO QUE REEMPLAZA A getAllMiembros()
+    private void loadMiembrosFromFirestore() {
+        if (db == null) return;
 
-        adapter = new MiembroAdapter(miembrosList, this);
-        recyclerView.setAdapter(adapter);
+        db.collection("miembros")
+                .get() // Pide los datos una sola vez
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        miembrosList.clear(); // Limpiar la lista existente
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Convertir el documento a tu objeto Miembro
+                            Miembro miembro = document.toObject(Miembro.class);
+                            miembro.setId(document.getId()); // Asegúrate de asignar el ID del documento
+                            miembrosList.add(miembro);
+                        }
+
+                        // Opcional: Ordenar la lista alfabéticamente si es necesario
+                        // Collections.sort(listaMiembros, (m1, m2) -> m1.getNombre().compareTo(m2.getNombre()));
+
+                        adapter.notifyDataSetChanged(); // Notificar al adaptador para que actualice la UI
+                    } else {
+                        Toast.makeText(this, "Error al cargar miembros: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     // ⭐ Manejo del click en la Tarjeta (Ir a Detalle/Edición/Registro de Visita)
@@ -102,6 +131,7 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
     @Override
     protected void onResume() {
         super.onResume();
-        loadMiembrosData();
+        // Recargar la lista cada vez que volvemos a esta actividad
+        loadMiembrosFromFirestore();
     }
 }
