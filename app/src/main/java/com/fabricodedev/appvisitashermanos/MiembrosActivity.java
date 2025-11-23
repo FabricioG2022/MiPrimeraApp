@@ -9,15 +9,20 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.fabricodedev.appvisitashermanos.api.ApiService;
+import com.fabricodedev.appvisitashermanos.api.VersiculoDiario;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import com.fabricodedev.appvisitashermanos.adapters.MiembroAdapter;
 import com.fabricodedev.appvisitashermanos.models.Miembro;
 import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Collections;
 
 // ⭐ Imports de Firestore
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,6 +34,20 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
     private MiembroAdapter adapter;
     private List<Miembro> miembrosList;
     private TextView tvSaludoLider;
+    private TextView tvVersiculoDiario;
+    // ⭐ Datos de la API.Bible-API.com
+    private static final String BASE_URL_BIBLE_API = "https://bible-api.com/";
+    // Versículo a cargar (ejemplo: Juan 3:16, URL-encoded)
+    private static final String[] VERSES = new String[]{
+            "John 3:16",
+            "Psalm 23:1",
+            "Romans 8:28",
+            "Philippians 4:13",
+            "Isaiah 41:10",
+            "Matthew 6:33"
+
+    };
+    //private static final String BIBLE_VERSION = "RVA";
     // ⭐ Referencia a Firestore
     private FirebaseFirestore db;
 
@@ -42,6 +61,7 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
 
         recyclerView = findViewById(R.id.rv_miembros_list);
         tvSaludoLider = findViewById(R.id.tv_saludo_lider);
+        tvVersiculoDiario = findViewById(R.id.tv_versiculo_diario);
 
         // Obtener el nombre de usuario que viene del Login
         String username = getIntent().getStringExtra("EXTRA_USERNAME");
@@ -63,6 +83,7 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
             Intent intent = new Intent(this, AddMiembroActivity.class);
             startActivity(intent);
         });
+        loadDailyVerse();
     }
 
     // ⭐ EL MÉTODO QUE REEMPLAZA A getAllMiembros()
@@ -90,7 +111,47 @@ public class MiembrosActivity extends AppCompatActivity implements MiembroAdapte
                     }
                 });
     }
+    private void loadDailyVerse() {
 
+        // 1. Inicializar Retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL_BIBLE_API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+        // ⭐ 1. Obtener una referencia aleatoria
+        String randomVerse = VERSES[new java.util.Random().nextInt(VERSES.length)];
+        // 2. Crear la llamada a la API
+        Call<VersiculoDiario> call = apiService.getDailyVerse(randomVerse);
+
+        // 3. Ejecutar la llamada de forma asíncrona
+        call.enqueue(new Callback<VersiculoDiario>() {
+            @Override
+            public void onResponse(Call<VersiculoDiario> call, Response<VersiculoDiario> response) {
+                if (response.isSuccessful() && response.body() != null) {
+
+                    VersiculoDiario versiculo = response.body();
+
+                    String texto = versiculo.getTexto();
+                    String referencia = versiculo.getReferencia();
+                    String traduccion = versiculo.getTraduccion();
+
+                    // ⭐ Actualizar la UI
+                    String finalVersiculo = "\"" + texto.trim() + "\"\n— " + referencia + " (" + traduccion + ")";
+                    tvVersiculoDiario.setText(finalVersiculo);
+
+                } else {
+                    tvVersiculoDiario.setText("Error al cargar versículo: Código " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<VersiculoDiario> call, Throwable t) {
+                tvVersiculoDiario.setText("Error de conexión con Bible-API.com: " + t.getMessage());
+            }
+        });
+    }
     // ⭐ Manejo del click en la Tarjeta (Ir a Detalle/Edición/Registro de Visita)
     @Override
     public void onItemClick(Miembro miembro) {
