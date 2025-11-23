@@ -16,15 +16,26 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
+        <ImageView
+            android:id="@+id/iv_foto_perfil"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_user_placeholder"
+            android:contentDescription="Foto del miembro"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
         <View
             android:id="@+id/v_estado_color"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:background="@drawable/shape_circle"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_foto_perfil"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="4dp"
-            android:layout_marginStart="4dp"/>
+            android:layout_marginStart="12dp"/>
 
         <TextView
             android:id="@+id/tv_miembro_nombre"
@@ -32,10 +43,10 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="8dp"
             android:text="Nombre Completo del Miembro"
             app:layout_constraintStart_toEndOf="@+id/v_estado_color"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_estado_color"
             app:layout_constraintEnd_toStartOf="@+id/iv_call_action" />
 
         <TextView
@@ -45,7 +56,7 @@
             android:textSize="14sp"
             android:layout_marginTop="4dp"
             android:text="Última Visita: 10-09-2025"
-            app:layout_constraintStart_toStartOf="@+id/tv_miembro_nombre"
+            app:layout_constraintStart_toStartOf="@+id/v_estado_color"
             app:layout_constraintTop_toBottomOf="@+id/tv_miembro_nombre"
             app:layout_constraintEnd_toStartOf="@+id/iv_call_action" />
 
@@ -56,7 +67,7 @@
             android:textSize="14sp"
             android:layout_marginTop="4dp"
             android:text="Teléfono: 555-1234"
-            app:layout_constraintStart_toStartOf="@+id/tv_miembro_nombre"
+            app:layout_constraintStart_toStartOf="@+id/v_estado_color"
             app:layout_constraintTop_toBottomOf="@+id/tv_ultima_visita"
             app:layout_constraintEnd_toStartOf="@+id/iv_call_action" />
 
