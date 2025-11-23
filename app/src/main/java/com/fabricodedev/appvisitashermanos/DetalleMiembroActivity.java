@@ -96,7 +96,7 @@ public class DetalleMiembroActivity extends AppCompatActivity {
                             if (miembroActual != null) {
                                 // Actualizar UI con datos del Miembro
                                 tvNombre.setText(miembroActual.getNombre());
-                                tvEstado.setText("Estado: " + miembroActual.getEstadoEspiritual() + " | Última Visita: " + miembroActual.getUltimaVisita());
+                                tvEstado.setText("Estado: " + miembroActual.getEstadoAnimico() + " | Última Visita: " + miembroActual.getUltimaVisita());
                                 tvTelefono.setText("Teléfono: " + miembroActual.getTelefono());
                                 tvDireccion.setText("Dirección: " + miembroActual.getDireccion());
 

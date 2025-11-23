@@ -88,7 +88,7 @@ public class MiembrosManager {
                     if (miembro != null) {
                         // Actualiza el objeto localmente
                         miembro.agregarVisita(nuevaVisita);
-                        miembro.setEstadoEspiritual(nuevoEstado);
+                        miembro.setEstadoAnimico(nuevoEstado);
                         miembro.setUltimaVisita(nuevaVisita.getFecha());
 
                         // Sube el objeto completo de nuevo

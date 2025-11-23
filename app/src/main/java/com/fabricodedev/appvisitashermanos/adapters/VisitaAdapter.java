@@ -33,7 +33,7 @@ public class VisitaAdapter extends RecyclerView.Adapter<VisitaAdapter.VisitaView
         // Formatear la nota para incluir el visitador
         String notaCompleta = visita.getNota() + "\n(Registrado por: " + visita.getVisitador() + ")";
 
-        holder.tvFecha.setText(visita.getFecha() + " (Estado final: " + visita.getNuevoEstadoEspiritual() + ")");
+        holder.tvFecha.setText(visita.getFecha() + " (Estado final: " + visita.getNuevoEstadoAnimico() + ")");
         holder.tvNota.setText(notaCompleta);
     }
 

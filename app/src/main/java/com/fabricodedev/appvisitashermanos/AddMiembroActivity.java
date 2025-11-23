@@ -50,7 +50,7 @@ public class AddMiembroActivity extends AppCompatActivity {
         // Inicializar campos de Firestore
         // Esto asegura que el objeto tenga las listas y campos necesarios para Firestore
         nuevoMiembro.setUltimaVisita("N/A");
-        nuevoMiembro.setEstadoEspiritual("Verde");
+        nuevoMiembro.setEstadoAnimico("Verde");
         // Si la lista de historialVisitas es null, inicialízala en el constructor de Miembro.
 
         // 3. ⭐ LLAMADA CORREGIDA: Pasar el objeto Miembro completo
