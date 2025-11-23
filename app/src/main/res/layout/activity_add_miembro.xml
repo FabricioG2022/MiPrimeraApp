@@ -9,15 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="24dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
             android:text="Añadir Nuevo Miembro"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,6 +61,19 @@
             android:inputType="phone"
             android:layout_marginBottom="32dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="URL de la Foto de Perfil:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_foto_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pega aquí el enlace de la imagen (URL pública)"
+            android:inputType="textUri"
+            android:layout_marginBottom="32dp"/>
         <Button
             android:id="@+id/btn_guardar_nuevo"
             android:layout_width="match_parent"
@@ -68,6 +81,5 @@
             android:text="AÑADIR MIEMBRO"
             android:backgroundTint="#0288D1"
             android:textSize="18sp"/>
-
     </LinearLayout>
 </ScrollView>

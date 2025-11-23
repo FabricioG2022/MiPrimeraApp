@@ -44,13 +44,14 @@ public class MiembrosManager {
     /**
      * 4. Lógica para EDITAR/ACTUALIZAR campos básicos.
      */
-    public void updateMiembroData(String id, String nombre, String direccion, String telefono) {
-
-        // Un mapa temporal con solo los campos a actualizar
+    public void updateMiembroData(String id, String nombre, String direccion, String telefono, String fotoUrl) {
+        if (db == null) return;
+        // Crear el mapa de datos a actualizar
         Map<String, Object> updates = new HashMap<>();
         updates.put("nombre", nombre);
         updates.put("direccion", direccion);
         updates.put("telefono", telefono);
+        updates.put("fotoUrl", fotoUrl);
 
         db.collection("miembros")
                 .document(id)

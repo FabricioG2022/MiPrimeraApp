@@ -12,7 +12,7 @@ import com.fabricodedev.appvisitashermanos.utils.MiembrosManager;
 
 public class AddMiembroActivity extends AppCompatActivity {
 
-    private EditText etNombre, etDireccion, etTelefono;
+    private EditText etNombre, etDireccion, etTelefono, etFotoUrl;
     private Button btnGuardar;
 
     @Override
@@ -24,6 +24,7 @@ public class AddMiembroActivity extends AppCompatActivity {
         etNombre = findViewById(R.id.et_add_nombre);
         etDireccion = findViewById(R.id.et_add_direccion);
         etTelefono = findViewById(R.id.et_add_telefono);
+        etFotoUrl = findViewById(R.id.et_foto_url);
         btnGuardar = findViewById(R.id.btn_guardar_nuevo);
 
         // 2. Configurar Listener
@@ -34,6 +35,7 @@ public class AddMiembroActivity extends AppCompatActivity {
         String nombre = etNombre.getText().toString().trim();
         String direccion = etDireccion.getText().toString().trim();
         String telefono = etTelefono.getText().toString().trim();
+        String fotoUrl = etFotoUrl.getText().toString().trim();
 
         // Validación básica
         if (nombre.isEmpty() || direccion.isEmpty() || telefono.isEmpty()) {
@@ -46,7 +48,9 @@ public class AddMiembroActivity extends AppCompatActivity {
         // 2. Crear el objeto Miembro
         // El constructor de Miembro debe ser compatible con: (id, nombre, direccion, telefono)
         Miembro nuevoMiembro = new Miembro(newId, nombre, direccion, telefono);
-
+        if (!fotoUrl.isEmpty()) {
+            nuevoMiembro.setFotoUrl(fotoUrl);
+        }
         // Inicializar campos de Firestore
         // Esto asegura que el objeto tenga las listas y campos necesarios para Firestore
         nuevoMiembro.setUltimaVisita("N/A");

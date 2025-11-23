@@ -18,7 +18,7 @@ public class EditarMiembroActivity extends AppCompatActivity {
     private String miembroId;
     // ⭐ Referencia a Firestore
     private FirebaseFirestore db;
-    private EditText etNombre, etDireccion, etTelefono;
+    private EditText etNombre, etDireccion, etTelefono, etFotoUrl;
     private Button btnGuardar;
 
     @Override
@@ -41,6 +41,7 @@ public class EditarMiembroActivity extends AppCompatActivity {
         etNombre = findViewById(R.id.et_editar_nombre);
         etDireccion = findViewById(R.id.et_editar_direccion);
         etTelefono = findViewById(R.id.et_editar_telefono);
+        etFotoUrl = findViewById(R.id.et_foto_url);
         btnGuardar = findViewById(R.id.btn_guardar_edicion);
 
         // 3. Cargar datos actuales del miembro en los EditText
@@ -64,6 +65,7 @@ public class EditarMiembroActivity extends AppCompatActivity {
                             etNombre.setText(miembroActual.getNombre());
                             etDireccion.setText(miembroActual.getDireccion());
                             etTelefono.setText(miembroActual.getTelefono());
+                            etFotoUrl.setText(miembroActual.getFotoUrl());
                         }
                     } else {
                         Toast.makeText(this, "Miembro no encontrado para edición.", Toast.LENGTH_SHORT).show();
@@ -81,6 +83,7 @@ public class EditarMiembroActivity extends AppCompatActivity {
         String nuevoNombre = etNombre.getText().toString().trim();
         String nuevaDireccion = etDireccion.getText().toString().trim();
         String nuevoTelefono = etTelefono.getText().toString().trim();
+        String nuevaFotoUrl = etFotoUrl.getText().toString().trim();
 
         if (nuevoNombre.isEmpty()) {
             Toast.makeText(this, "El nombre no puede estar vacío.", Toast.LENGTH_LONG).show();
@@ -88,12 +91,12 @@ public class EditarMiembroActivity extends AppCompatActivity {
         }
 
         // Llamar al método de actualización de Firestore (ASÍNCRONO)
-        // Ya no devuelve un booleano
         MiembrosManager.getInstance().updateMiembroData(
                 miembroId,
                 nuevoNombre,
                 nuevaDireccion,
-                nuevoTelefono
+                nuevoTelefono,
+                nuevaFotoUrl
         );
 
         // Mostramos el mensaje de éxito inmediatamente, asumiendo que la operación se completará.

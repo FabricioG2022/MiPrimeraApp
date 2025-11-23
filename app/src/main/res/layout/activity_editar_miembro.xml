@@ -60,6 +60,19 @@
             android:hint="Ej: 555-1234"
             android:inputType="phone"
             android:layout_marginBottom="32dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="URL de la Foto de Perfil:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/et_foto_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pega aquí el enlace de la imagen (URL pública)"
+            android:inputType="textUri"
+            android:layout_marginBottom="32dp"/>
 
         <Button
             android:id="@+id/btn_guardar_edicion"
