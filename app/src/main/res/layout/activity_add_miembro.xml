@@ -15,70 +15,71 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
-            android:text="Añadir Nuevo Miembro"
+            android:text="@string/añadir"
             android:textSize="28sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre Completo:"
+            android:text="@string/nombre_compl"
             android:textSize="16sp"
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/et_add_nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre y Apellido del Miembro"
+            android:hint="@string/plh_nombre_apellido"
             android:inputType="textPersonName"
             android:layout_marginBottom="16dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dirección de Domicilio:"
+            android:text="@string/direccion"
             android:textSize="16sp"
             android:textStyle="bold"/>
+
         <EditText
             android:id="@+id/et_add_direccion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ej: Avenida Siempre Viva 742"
-            android:inputType="textPostalAddress"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:hint="@string/plh_direccion"
+            android:inputType="textPostalAddress" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Teléfono de Contacto:"
+            android:text="@string/telefono_cont"
             android:textSize="16sp"
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/et_add_telefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ej: 555-5678"
+            android:hint="@string/plh_telefono"
             android:inputType="phone"
             android:layout_marginBottom="32dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="URL de la Foto de Perfil:"
+            android:text="@string/url"
             android:textSize="16sp"
             android:textStyle="bold"/>
         <EditText
             android:id="@+id/et_foto_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Pega aquí el enlace de la imagen (URL pública)"
+            android:hint="@string/plh_url"
             android:inputType="textUri"
             android:layout_marginBottom="32dp"/>
         <Button
             android:id="@+id/btn_guardar_nuevo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AÑADIR MIEMBRO"
+            android:text="@string/btn_añadir"
             android:backgroundTint="#0288D1"
             android:textSize="18sp"/>
     </LinearLayout>

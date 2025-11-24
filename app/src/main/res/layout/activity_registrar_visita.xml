@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registrar Visita para:"
+            android:text="@string/reg_visita"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
@@ -25,12 +25,12 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_marginBottom="24dp"
-            tools:text="Juan Pérez" />
+            tools:text="@string/visita_persona" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha de la Visita:"
+            android:text="@string/visita_fecha"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
@@ -44,12 +44,12 @@
             android:textSize="18sp"
             android:textStyle="italic"
             android:layout_marginBottom="16dp"
-            tools:text="25-10-2025" />
+            tools:text="@string/plh_visita_fecha" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Actualizar Estado Anímico:"
+            android:text="@string/estado_animico"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
@@ -66,7 +66,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Verde"
+                android:text="@string/rb_verde"
                 android:checked="true" />
 
             <RadioButton
@@ -74,20 +74,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Amarillo" />
+                android:text="@string/rb_amarillo" />
 
             <RadioButton
                 android:id="@+id/rb_estado_rojo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Rojo" />
+                android:text="@string/rb_rojo" />
         </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nota de la Visita / Comentarios:"
+            android:text="@string/nota"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="8dp"/>
@@ -99,7 +99,7 @@
             android:minLines="4"
             android:gravity="top|start"
             android:inputType="textMultiLine"
-            android:hint="Ej: Se habló de la familia. Se solicitó oración por un trabajo, etc."
+            android:hint="@string/plh_nota"
             android:background="@android:drawable/editbox_background"
             android:padding="8dp"
             android:layout_marginBottom="32dp"/>
@@ -109,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#0288D1"
-            android:text="GUARDAR REGISTRO DE VISITA"
+            android:text="@string/btn_guardar_visita"
             android:textSize="18sp"/>
 
     </LinearLayout>

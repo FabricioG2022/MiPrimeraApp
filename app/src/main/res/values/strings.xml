@@ -1,6 +1,80 @@
 <resources>
+    // Main (Pantalla Inicial)
     <string name="app_name">My Application</string>
     <string name="bienvenido">Bienvenido</string>
     <string name="name">Tu app de Visitas</string>
     <string name="ingresar">Ingresar</string>
+
+    // Login
+    <string name="nombre_usuario">NOMBRE DE USUARIO</string>
+    <string name="ingresa_email">Ingresa tu email</string>
+    <string name="contrasenia">CONTRASEÑA</string>
+    <string name="ingresa_contrasenia">Ingresa tu contraseña</string>
+    <string name="btn_sesion">INICIAR SESIÓN</string>
+    <string name="cuenta">No tienes una cuenta?</string>
+    <string name="link_registro">Registrate aquí</string>
+
+    // Registro
+    <string name="email">EMAIL</string>
+    <string name="plh_email">Ingresa tu email</string>
+    <string name="confirm_contr">CONFIRMAR CONTRASEÑA</string>
+    <string name="plh_contr">Reingresa tu contraseña</string>
+    <string name="btn_regist">REGISTRARSE</string>
+    <string name="preg_registro">Estas registrado?</string>
+    <string name="link_login">Inicia sesión aquí</string>
+
+    // Pantalla principal para el usuario
+    <string name="saludo_lider">Hola, [Líder]. Miembros a visitar:</string>
+    <string name="cargando">Cargando contenido externo...</string>
+
+    // Cards de personas
+    <string name="nombre_miembro">Nombre Completo del Miembro</string>
+    <string name="ultima_visita">Última Visita: 10-09-2025</string>
+    <string name="telefono">Teléfono: 555-1234</string>
+
+    // Añadir miembro
+    <string name="añadir">Añadir Nuevo Miembro</string>
+    <string name="nombre_compl">Nombre Completo:</string>
+    <string name="plh_nombre_apellido">Nombre y Apellido del Miembro</string>
+    <string name="direccion">Dirección de Domicilio:</string>
+    <string name="plh_direccion">Ej: Avenida Siempre Viva 742</string>
+    <string name="telefono_cont">Teléfono de Contacto:</string>
+    <string name="plh_telefono">Ej: 555-5678</string>
+    <string name="url">URL de la Foto de Perfil:</string>
+    <string name="plh_url">Pega aquí el enlace de la imagen (URL pública)</string>
+    <string name="btn_añadir">AÑADIR MIEMBRO</string>
+
+    // Detalle miembro
+    <string name="nombre_miem">Nombre del Miembro</string>
+    <string name="estado_visita">Estado: Verde | Última Visita: 20-09-2025</string>
+    <string name="contac_ubic">Contacto y Ubicación</string>
+    <string name="dire_falsa">Dirección: Calle Falsa 123</string>
+    <string name="historial">Historial de Visitas</string>
+    <string name="btn_regist_visita">Registrar Visita</string>
+    <string name="btn_edit_datos">Editar Datos</string>
+
+    // Editar miembro
+    <string name="edit_datos">Editar Datos del Miembro</string>
+    <string name="plh_nombre">Ej: Juan Pérez</string>
+    <string name="dire">Dirección:</string>
+    <string name="plh_dire_edit_falsa">Ej: Calle Falsa 123</string>
+    <string name="tl">Teléfono:</string>
+    <string name="btn_guardar">GUARDAR CAMBIOS</string>
+
+    // Registrar visita
+    <string name="reg_visita">Registrar Visita para:</string>
+    <string name="visita_persona">Juan Pérez</string>
+    <string name="visita_fecha">Fecha de la Visita:</string>
+    <string name="plh_visita_fecha">25-10-2025</string>
+    <string name="estado_animico">Actualizar Estado Anímico:</string>
+    <string name="rb_verde">Verde</string>
+    <string name="rb_rojo">Rojo</string>
+    <string name="rb_amarillo">Amarillo</string>
+    <string name="nota">Nota de la Visita / Comentarios:</string>
+    <string name="plh_nota">Ej: Se habló de la familia. Se solicitó oración por un trabajo, etc.</string>
+    <string name="btn_guardar_visita">GUARDAR REGISTRO DE VISITA</string>
+
+    // Item visita nota
+    <string name="estado_nota">20-09-2025 (Estado: Amarillo)</string>
+    <string name="plh_nota2">Se discutió la falta de asistencia y se acordó un plan de lectura semanal. Se dejó ánimo y apoyo. Visitador: [Líder]</string>
 </resources>

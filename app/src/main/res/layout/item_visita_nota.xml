@@ -11,13 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:text="20-09-2025 (Estado: Amarillo)" />
+        android:text="@string/estado_nota" />
 
     <TextView
         android:id="@+id/tv_historial_nota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Se discutió la falta de asistencia y se acordó un plan de lectura semanal. Se dejó ánimo y apoyo. Visitador: [Líder]"
+        android:text="@string/plh_nota2"
         android:layout_marginTop="4dp"/>
 
 </LinearLayout>

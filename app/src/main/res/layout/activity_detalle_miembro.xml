@@ -35,20 +35,20 @@
                 android:textSize="28sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="8dp"
-                android:text="Nombre del Miembro" />
+                android:text="@string/nombre_miem" />
 
             <TextView
                 android:id="@+id/tv_detalle_estado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="Estado: Verde | Última Visita: 20-09-2025"
+                android:text="@string/estado_visita"
                 android:layout_marginBottom="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contacto y Ubicación"
+                android:text="@string/contac_ubic"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginTop="8dp"/>
@@ -57,21 +57,21 @@
                 android:id="@+id/tv_detalle_telefono"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Teléfono: 555-1234"
+                android:text="@string/telefono"
                 android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/tv_detalle_direccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dirección: Calle Falsa 123"
+                android:text="@string/dire_falsa"
                 android:textSize="16sp"
                 android:layout_marginBottom="24dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Historial de Visitas"
+                android:text="@string/historial"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="8dp"/>
@@ -99,7 +99,7 @@
             android:id="@+id/btn_registrar_visita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registrar Visita"
+            android:text="@string/btn_regist_visita"
             android:backgroundTint="#0288D1"
             android:layout_marginEnd="8dp"
             app:icon="@android:drawable/ic_menu_edit" />
@@ -108,7 +108,7 @@
             android:id="@+id/btn_editar_datos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar Datos"
+            android:text="@string/btn_edit_datos"
             android:backgroundTint="#0288D1"
             android:layout_marginStart="8dp"
             app:icon="@android:drawable/ic_menu_info_details" />

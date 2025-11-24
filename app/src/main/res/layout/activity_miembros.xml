@@ -15,7 +15,7 @@
         android:padding="16dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="Hola, [Líder]. Miembros a visitar:"
+        android:text="@string/saludo_lider"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Cargando contenido externo..."
+            android:text="@string/cargando"
             android:textSize="16sp"
             android:textStyle="italic"
             android:textColor="@android:color/holo_blue_dark" /> </androidx.cardview.widget.CardView>
