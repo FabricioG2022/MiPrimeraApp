@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_añadir"
-            android:backgroundTint="#0288D1"
+            android:backgroundTint="@color/btn"
             android:textSize="18sp"/>
     </LinearLayout>
 </ScrollView>
