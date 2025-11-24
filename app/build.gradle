@@ -2,11 +2,15 @@ plugins {
     alias(libs.plugins.android.application)
     id 'com.google.gms.google-services'
 }
+def BIBLIA_API_KEY = project.hasProperty("BIBLIA_API_KEY") ? project.BIBLIA_API_KEY : ""
 
 android {
     namespace 'com.fabricodedev.appvisitashermanos'
     compileSdk 36
 
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         applicationId "com.fabricodedev.appvisitashermanos"
         minSdk 24
@@ -15,6 +19,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BIBLIA_API_KEY", "\"${BIBLIA_API_KEY}\""
     }
 
     buildTypes {

@@ -6,12 +6,11 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 public interface ApiService {
 
-    // ⭐ BASE_URL: https://bible-api.com/
-
-    // {referencia} será el versículo, ej: "john 3:16"
-    @GET("{referencia}")
+    @GET("bible/content/{version}.html.json")
     Call<VersiculoDiario> getDailyVerse(
-            @Path("referencia") String referencia
-            //@Query("translation") String version // ⭐ NUEVO: Parámetro para la traducción
+            @Path("version") String version,
+            @Query("passage") String passage,
+            @Query("key") String apiKey,
+            @Query("style") String style
     );
 }
