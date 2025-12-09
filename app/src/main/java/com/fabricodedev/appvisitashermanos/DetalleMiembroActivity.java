@@ -163,9 +163,9 @@ public class DetalleMiembroActivity extends AppCompatActivity {
                 .show();
     }
 
-    // ⭐ MÉTODO MIGRADO 2: Eliminación asíncrona. Ya no devuelve un booleano.
+    // ⭐ MÉTODO MIGRADO 2: Eliminación asíncrona.
     private void eliminarMiembro(String id) {
-        // Llamar al método de eliminación de Firestore (ya no devuelve booleano)
+        // Llamar al método de eliminación de Firestore
         db.collection("miembros").document(id).delete()
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Miembro eliminado con éxito.", Toast.LENGTH_SHORT).show();
@@ -175,8 +175,6 @@ public class DetalleMiembroActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error al eliminar: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
-
-        // El antiguo código ha sido eliminado/reemplazado.
     }
     @Override
     public boolean onSupportNavigateUp() {
